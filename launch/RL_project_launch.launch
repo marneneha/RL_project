@@ -7,7 +7,7 @@
         <!-- for the value tag, provide the path to the world file that you downloaded -->
 	<include file= "$(find gazebo_ros)/launch/empty_world.launch"> 
 		<!-- <arg name="world_name" value="worlds/competition_arena.world"/>  -->
-        <arg name="world_name" value="worlds/cafe.world"/>
+        <arg name="world_name" value="$(find RL_project)/worlds/rl_based_rrt.world"/>
 	</include>
 
 	<arg name ="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>
@@ -17,8 +17,8 @@
     <arg name="roll" default="0.0"/>
     <arg name="pitch" default="0.0"/>
     <arg name="yaw" default="0.0"/>
-    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro" />
-    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find RL_project)/urdf/turtlebot_with_sensor.urdf.xacro" />
+    <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
     args="-urdf -model turtlebot3_$(arg model) -param robot_description -x $(arg x) -y $(arg y) -z $(arg z) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)"/>
 
 </launch>
